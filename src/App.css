@@ -1,0 +1,33 @@
+* {
+  font-family: sans-serif;
+  padding: 10px;
+}
+.my-task {
+  /* border: 2px solid gray; */
+  display: flex;
+  justify-content: space-between;
+  width: 220px;
+  padding: 2px;
+  align-items: center;
+  cursor: pointer;
+}
+.container {
+  border: 2px solid #1976d2;
+  border-radius: 10px;
+  width: 220px;
+  height: 300px;
+  padding: 10px;
+ 
+}
+.wrapper{
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+.main-container{
+    width: 70%;
+    /* border: 3px solid black; */
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
