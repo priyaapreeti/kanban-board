@@ -5,6 +5,10 @@ import React, { useState } from "react";
 import { addTask } from "./redux/slice";
 
 function App() {
+  const [val, setVal] = useState("");
+  const [dropIndicator, setDropIndicator] = useState("");
+  const dispatcher = useDispatch();
+  const Alltasks = useSelector((state) => state.tasks);
   const tasksRenderer = (status) => {
     return Alltasks.filter((task) => task.status === status).map((task) => (
       <div
@@ -19,12 +23,6 @@ function App() {
       </div>
     ));
   };
-
-  const [val, setVal] = useState([]);
-  const [dropIndicator, setDropIndicator] = useState("");
-  const dispatcher = useDispatch();
-  const Alltasks = useSelector((state) => state.tasks);
-
   const detect = (e) => {
     if (e.key === "Enter") {
       dispatcher(
@@ -47,9 +45,9 @@ function App() {
     e.preventDefault();
     const taskID = e.dataTransfer.getData("text/plain");
 
-    setVal((prevTasks) => {
-      console.log(prevTasks);
-      return prevTasks.map((task) => {
+    dispatcher((prevTasks) => {
+      // console.log(prevTasks);
+      return Alltasks.map((task) => {
         if (task.id === +taskID) {
           return { ...task, status };
         }
@@ -57,7 +55,7 @@ function App() {
       });
     });
   };
-  
+
   const handleDragerr = (e) => {
     e.preventDefault();
     setDropIndicator(e.currentTarget.id);
@@ -89,7 +87,9 @@ function App() {
         </div>
         <div
           className="container"
-          style={{ backgroundColor: dropIndicator === "progress" ? "gray" : "" }}
+          style={{
+            backgroundColor: dropIndicator === "progress" ? "gray" : "",
+          }}
           id="progress"
           onDrop={(e) => handleOnDrop(e, "progress")}
           onDragOver={handleDragerr}
