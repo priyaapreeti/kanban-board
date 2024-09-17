@@ -2,14 +2,15 @@ import { TextField, Button } from "@mui/material";
 import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
-import { addTask } from "./redux/slice";
+import { addTask, updateTask } from "./redux/slice";
 
 function App() {
   const [val, setVal] = useState("");
   const [dropIndicator, setDropIndicator] = useState("");
   const dispatcher = useDispatch();
-  const Alltasks = useSelector((state) => state.tasks);
+  const Alltasks = useSelector((state) => state.tasks.data);
   const tasksRenderer = (status) => {
+    // console.log(Alltasks);
     return Alltasks.filter((task) => task.status === status).map((task) => (
       <div
         key={task.id}
@@ -44,16 +45,22 @@ function App() {
   const handleOnDrop = (e, status) => {
     e.preventDefault();
     const taskID = e.dataTransfer.getData("text/plain");
-
-    dispatcher((prevTasks) => {
-      // console.log(prevTasks);
-      return Alltasks.map((task) => {
-        if (task.id === +taskID) {
-          return { ...task, status };
-        }
-        return task;
-      });
-    });
+    // console.log(Alltasks);
+    // const newState = () => {
+    //   return Alltasks.map((task) => {
+    //     if (task.id === +taskID) {
+    //       return { ...task, status };
+    //     }
+    //     return task;
+    //   });
+    // };
+    const updatedTasks=Alltasks.map(task=>{if(task.id===+taskID){
+      return {...task,status}
+    }
+    return task
+  })
+    console.log(updatedTasks);
+    dispatcher(updateTask(updatedTasks));
   };
 
   const handleDragerr = (e) => {
@@ -111,16 +118,3 @@ function App() {
 }
 
 export default App;
-
-// return (
-//   <div
-//     key={idx}
-//     draggable
-//     onDragStart={(e) => handleDragStart(e, task.id)}
-//     onDragEnd={handleDragEnd()}
-//     className="my-task"
-//   >
-//     {task.taskData}
-//     <Button variant=""> X </Button>
-//   </div>
-// );
