@@ -3,7 +3,6 @@
   padding: 10px;
 }
 .my-task {
-  /* border: 2px solid gray; */
   display: flex;
   justify-content: space-between;
   width: 220px;
@@ -12,22 +11,27 @@
   cursor: pointer;
 }
 .container {
-  border: 2px solid #1976d2;
+  border: 2px dotted #1976d2;
   border-radius: 10px;
   width: 220px;
   height: 300px;
-  padding: 10px;
+  /* padding: 10px; */
  
 }
 .wrapper{
     padding: 20px;
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
 .main-container{
-    width: 70%;
+    width: 60%;
     /* border: 3px solid black; */
     display: flex;
     flex-direction: column;
     margin: auto;
+}
+.cross:hover{
+  color: red;
+  font-weight: bold;
 }

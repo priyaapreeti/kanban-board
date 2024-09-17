@@ -2,7 +2,7 @@ import { TextField, Button } from "@mui/material";
 import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
-import { addTask, updateTask } from "./redux/slice";
+import { addTask, deleteTask, updateTask } from "./redux/slice";
 
 function App() {
   const [val, setVal] = useState("");
@@ -20,7 +20,7 @@ function App() {
         className="my-task"
       >
         {task.taskData}
-        <Button variant=""> X </Button>
+        <Button onClick={()=>dispatcher(deleteTask(task.id))} variant="" className="cross"> X </Button>
       </div>
     ));
   };
@@ -85,31 +85,33 @@ function App() {
       <div className="wrapper">
         <div
           className="container"
-          style={{ backgroundColor: dropIndicator === "todo" ? "gray" : "" }}
+          style={{ backgroundColor: dropIndicator === "todo" ? "#a6aba7" : "" }}
           id="todo"
           onDrop={(e) => handleOnDrop(e, "todo")}
           onDragOver={handleDragerr}
         >
+          <h2>To-do</h2>
           {tasksRenderer("todo")}
         </div>
         <div
           className="container"
           style={{
-            backgroundColor: dropIndicator === "progress" ? "gray" : "",
+            backgroundColor: dropIndicator === "progress" ? "#a6aba7" : "",
           }}
           id="progress"
           onDrop={(e) => handleOnDrop(e, "progress")}
           onDragOver={handleDragerr}
-        >
+        ><h2>In progress</h2>
           {tasksRenderer("progress")}
         </div>
         <div
           className="container"
-          style={{ backgroundColor: dropIndicator === "done" ? "gray" : "" }}
+          style={{ backgroundColor: dropIndicator === "done" ? "#a6aba7" : "" }}
           id="done"
           onDrop={(e) => handleOnDrop(e, "done")}
           onDragOver={handleDragerr}
         >
+          <h2>Done</h2>
           {tasksRenderer("done")}
         </div>
       </div>
